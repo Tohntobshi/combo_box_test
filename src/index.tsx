@@ -29,12 +29,13 @@ function ComboBox({ placeholder, chosenItem, searchText, onSearchTextChange,
     const [isOpen, setIsOpen] = useState(false)
     const inputRef = useRef<HTMLInputElement | null>(null)
     useEffect(() => {
+        if (!isOpen) return
         const onDocumentClick = () => {
             setIsOpen(false)
         }
         window.addEventListener('click', onDocumentClick)
         return () => window.removeEventListener('click', onDocumentClick)
-    }, [])
+    }, [isOpen])
     const onOpenButtonClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation()
         setIsOpen(true)
